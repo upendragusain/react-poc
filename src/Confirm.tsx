@@ -1,7 +1,9 @@
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import './Confirm.css'
 
 interface IProps {
+   open: boolean
    title: string
    content: string
    cancelCaption?: string
@@ -18,7 +20,7 @@ class Confirm extends React.Component<IProps> {
 
    public render() {
       return (
-         <div className="confirm-wrapperconfirm-visible">
+         <div className='confirm-wrapper confirm-visible'>
             <div className="confirm-container">
                <div className="confirm-title-container">
                   <span>{this.props.title}</span>

@@ -14,6 +14,7 @@ const handleCancelClick = () => {
 function App() {
    return (
       <Confirm
+         open={false}
          title="React and Typescript"
          content="Are you sure?"
          onCancelClick={handleCancelClick}

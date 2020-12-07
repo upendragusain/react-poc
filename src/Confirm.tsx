@@ -12,37 +12,52 @@ interface IProps {
    onCancelClick: () => void
 }
 
-class Confirm extends React.Component<IProps> {
-   public static defaultProps = {
+const Confirm: React.FunctionComponent<IProps>  = (props) => {
+   console.log('Confirm rendering...')
+
+   Confirm.defaultProps = {
       cancelCaption: 'Cancel',
       okCaption: 'Ok',
    }
 
-   public render() {
+   const [likeCount, setLikeCount] = React.useState(0)
+
+   const handleLikeClick = () => {
+      setLikeCount(likeCount + 1)
+   }
+
+   React.useEffect(() => {
+      console.log('Confirm first rendering')
+   }, [likeCount])
+
       return (
-         <div className={ this.props.open ? 'confirm-wrapper confirm-visible' : 'confirm-wrapper'}>
+         <div className={ props.open ? 'confirm-wrapper confirm-visible' : 'confirm-wrapper'}>
             <div className="confirm-container">
                <div className="confirm-title-container">
-                  <span>{this.props.title}</span>
+                  <span>{props.title}</span>
                </div>
                <div className="confirm-content-container">
-                  <p>{this.props.content}</p>
+                  <p>{props.content}</p>
+                  <button onClick={handleLikeClick}>
+                     Like! {likeCount <= 5 ? likeCount : 'wow you really like it! - ' + likeCount}
+                  </button>
                </div>
                <div className="confirm-buttons-container">
                   <button
                      className="confirm-cancel"
-                     onClick={this.props.onCancelClick}
+                     onClick={props.onCancelClick}
                   >
-                     {this.props.cancelCaption}
+                     {props.cancelCaption}
                   </button>
-                  <button className="confirm-ok" onClick={this.props.onOkClick}>
-                     {this.props.okCaption}
+                  <button className="confirm-ok" onClick={props.onOkClick}>
+                     {props.okCaption}
                   </button>
                </div>
             </div>
          </div>
       )
-   }
+
 }
 
-export default Confirm
+const ConfirmMemo = React.memo(Confirm)
+export default ConfirmMemo

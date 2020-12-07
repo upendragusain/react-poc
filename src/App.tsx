@@ -27,20 +27,20 @@ class App extends React.Component<{}, IState> {
    }
 
    public static getDerivedStateFromProps(props: {}, state: IState) {
-      console.log('getDerivedStateFromProps', props, state)
+      //console.log('getDerivedStateFromProps', props, state)
       return null
    }
 
    public shouldComponentUpdate(nextProps: {}, nextState: IState) {
-      console.log('shouldComponentUpdate', nextProps, nextState)
+      //console.log('shouldComponentUpdate', nextProps, nextState)
       return true
    }
 
    public getSnapshotBeforeUpdate(prevProps: {}, prevState: IState) {
       this.renderCount += 1
-      console.log('getSnapshotBeforeUpdate', prevProps, prevState, {
-         renderCount: this.renderCount,
-      })
+      //console.log('getSnapshotBeforeUpdate', prevProps, prevState, {
+      //   renderCount: this.renderCount,
+      //})
       return this.renderCount
    }
 
@@ -49,9 +49,9 @@ class App extends React.Component<{}, IState> {
       prevState: IState,
       snapshot: number,
    ) {
-      console.log('componentDidUpdate', prevState, prevState, snapshot, {
-         renderCount: this.renderCount,
-      })
+      //console.log('componentDidUpdate', prevState, prevState, snapshot, {
+      //   renderCount: this.renderCount,
+      //})
    }
 
    public componentWillUnmount() {

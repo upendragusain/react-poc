@@ -1,19 +1,34 @@
 import React from 'react'
+import './Confirm.css'
 
-class Confirm extends React.Component {
+interface IProps {
+   title: string
+   content: string
+   cancelCaption?: string
+   okCaption?: string
+}
+
+class Confirm extends React.Component<IProps> {
+   public static defaultProps = {
+      cancelCaption: 'Cancel',
+      okCaption: 'Ok',
+   }
+
    public render() {
       return (
          <div className="confirm-wrapperconfirm-visible">
             <div className="confirm-container">
                <div className="confirm-title-container">
-                  <span>title</span>
+                  <span>{this.props.title}</span>
                </div>
                <div className="confirm-content-container">
-                  <p>content</p>
+                  <p>{this.props.content}</p>
                </div>
                <div className="confirm-buttons-container">
-                  <button className="confirm-cancel">cancel</button>
-                  <button className="confirm-ok">OK</button>
+                  <button className="confirm-cancel">
+                     {this.props.cancelCaption}
+                  </button>
+                  <button className="confirm-ok">{this.props.okCaption}</button>
                </div>
             </div>
          </div>

@@ -1,18 +1,12 @@
+/* eslint-disable react/no-direct-mutation-state */
 import React from 'react'
 import './App.css'
 
 import Confirm from './Confirm'
 
-const handleOkClick = () => {
-   console.log('Ok Clikced!')
-}
-
-const handleCancelClick = () => {
-   console.log('Cancel clicked')
-}
-
 interface IState {
    confirmOpen: boolean
+   confirmMessage: string
 }
 
 class App extends React.Component<{}, IState> {
@@ -20,18 +14,33 @@ class App extends React.Component<{}, IState> {
       super(props)
       this.state = {
          confirmOpen: true,
+         confirmMessage: 'Please hit the confirm button',
       }
+   }
+
+   private handleOkClick = () => {
+      console.log('Ok Clicked!')
+      this.setState({ confirmOpen: false, confirmMessage: 'Ok clicked!' })
+   }
+
+   private handleCancelClick = () => {
+      console.log('Cancel clicked')
+      this.setState({ confirmOpen: false, confirmMessage: 'Cancel clicked!' })
    }
 
    public render() {
       return (
-         <Confirm
-            open={this.state.confirmOpen}
-            title="React and Typescript"
-            content="Are you sure?"
-            onCancelClick={handleCancelClick}
-            onOkClick={handleOkClick}
-         />
+         <div>
+            <p> {this.state.confirmMessage} </p>
+
+            <Confirm
+               open={this.state.confirmOpen}
+               title="React and Typescript"
+               content="Are you sure?"
+               onCancelClick={this.handleCancelClick}
+               onOkClick={this.handleOkClick}
+            />
+         </div>
       )
    }
 }

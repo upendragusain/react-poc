@@ -11,16 +11,29 @@ const handleCancelClick = () => {
    console.log('Cancel clicked')
 }
 
-function App() {
-   return (
-      <Confirm
-         open={false}
-         title="React and Typescript"
-         content="Are you sure?"
-         onCancelClick={handleCancelClick}
-         onOkClick={handleOkClick}
-      />
-   )
+interface IState {
+   confirmOpen: boolean
+}
+
+class App extends React.Component<{}, IState> {
+   constructor(props: {}) {
+      super(props)
+      this.state = {
+         confirmOpen: true,
+      }
+   }
+
+   public render() {
+      return (
+         <Confirm
+            open={this.state.confirmOpen}
+            title="React and Typescript"
+            content="Are you sure?"
+            onCancelClick={handleCancelClick}
+            onOkClick={handleOkClick}
+         />
+      )
+   }
 }
 
 export default App

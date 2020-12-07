@@ -12,6 +12,7 @@ interface IState {
 
 class App extends React.Component<{}, IState> {
    private timer: number = 0
+   private renderCount: number = 0
    constructor(props: {}) {
       super(props)
       this.state = {
@@ -23,6 +24,38 @@ class App extends React.Component<{}, IState> {
 
    public componentDidMount() {
       this.timer = window.setInterval(() => this.handleTimerTick(), 1000)
+   }
+
+   public static getDerivedStateFromProps(props: {}, state: IState) {
+      console.log('getDerivedStateFromProps', props, state)
+      return null
+   }
+
+   public shouldComponentUpdate(nextProps: {}, nextState: IState) {
+      console.log('shouldComponentUpdate', nextProps, nextState)
+      return true
+   }
+
+   public getSnapshotBeforeUpdate(prevProps: {}, prevState: IState) {
+      this.renderCount += 1
+      console.log('getSnapshotBeforeUpdate', prevProps, prevState, {
+         renderCount: this.renderCount,
+      })
+      return this.renderCount
+   }
+
+   public componentDidUpdate(
+      prevProps: {},
+      prevState: IState,
+      snapshot: number,
+   ) {
+      console.log('componentDidUpdate', prevState, prevState, snapshot, {
+         renderCount: this.renderCount,
+      })
+   }
+
+   public componentWillUnmount() {
+      clearInterval()
    }
 
    private handleTimerTick = () => {

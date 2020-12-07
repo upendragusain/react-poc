@@ -6,6 +6,8 @@ interface IProps {
    content: string
    cancelCaption?: string
    okCaption?: string
+   onOkClick: () => void
+   onCancelClick: () => void
 }
 
 class Confirm extends React.Component<IProps> {
@@ -25,10 +27,15 @@ class Confirm extends React.Component<IProps> {
                   <p>{this.props.content}</p>
                </div>
                <div className="confirm-buttons-container">
-                  <button className="confirm-cancel">
+                  <button
+                     className="confirm-cancel"
+                     onClick={this.props.onCancelClick}
+                  >
                      {this.props.cancelCaption}
                   </button>
-                  <button className="confirm-ok">{this.props.okCaption}</button>
+                  <button className="confirm-ok" onClick={this.props.onOkClick}>
+                     {this.props.okCaption}
+                  </button>
                </div>
             </div>
          </div>
